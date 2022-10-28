@@ -3,6 +3,7 @@ const express = require("express"); //the import
 const app = express(); //create an instance
 const { simpsons } = require("./data/simpsons");
 const { checkToken } = require("./middleware/auth");
+const { addToLog } = require("./middleware/logging");
 const { getUniqueId } = require("./utils");
 
 simpsons.forEach((element) => {
@@ -30,6 +31,7 @@ app.use("/create", require("./routes/create"));
 app.use("/update", checkToken, require("./routes/update"));
 app.use("/login", require("./routes/login"));
 app.use("/logoff", checkToken, require("./routes/logoff"));
+
 
 const port = process.env.PORT || 6001;
 app.listen(port, () => {

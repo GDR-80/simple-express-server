@@ -18,7 +18,11 @@ router.post("/", (req, res) => {
   if (indexOfUser > -1) {
     const token = getUniqueId(64);
 
-    simpsons[indexOfUser].token = token;
+    if (!simpsons[indexOfUser].tokens) {
+      simpsons[indexOfUser].tokens = [];
+    }
+
+    simpsons[indexOfUser].tokens.push(token);
 
     res.send({ status: 1, token });
     return;

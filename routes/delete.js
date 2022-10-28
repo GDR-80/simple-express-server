@@ -6,6 +6,8 @@ router.delete("/", (req, res) => {
     return item.id == req.currentUser.id;
   });
 
+
+  
   req.simpsons.splice(indexOfItem, 1);
   res.send({ status: 1 });
 });

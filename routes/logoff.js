@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 router.delete("/", (req, res) => {
-  console.log("Delete ran!");
+  const { headers, currentUser } = req;
 
-  console.log(req.currentUser);
+  const indexOfItem = currentUser.tokens.findIndex((item) => {
+    return item === headers.token;
+  });
 
-  delete req.currentUser.token;
-
+  currentUser.tokens.splice(indexOfItem, 1);
   res.send({ status: 1 });
 });
 

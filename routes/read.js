@@ -24,6 +24,8 @@ router.get("/", (req, res) => {
   //   count <= _simpsons.length
   // ) {
   //   _simpsons.length = count;
+
+  // console.log(req.simpsons);
   // }
 
   res.send(req.currentUser);
