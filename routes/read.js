@@ -1,13 +1,16 @@
 const express = require("express");
+const { getUser } = require("../mysql/queries");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  // console.log(req.simpsons);
-  // let { count, search } = req.query;
-  // count = Number(count);
+router.get("/", async (req, res) => {
+  const results = await req.asyncMySQL(getUser(req.headers.token));
 
-  // const _simpsons = [...req.simpsons];
+  if (results.length === 0) {
+    res.send({ status: 0, error: "User not found" });
+    return;
+  }
 
+<<<<<<< HEAD
   // //if a search filter the results
   // let filtered = _simpsons;
   // if (search) {
@@ -29,6 +32,9 @@ router.get("/", (req, res) => {
   // }
 
   res.send(req.currentUser);
+=======
+  res.send({ status: 1, result: results[0] });
+>>>>>>> 53e67de417fde6f3930d557bee69763405c46b75
 });
 
 module.exports = router;
