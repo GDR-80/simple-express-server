@@ -16,9 +16,9 @@ router.post("/", async (req, res) => {
 
   const results = await req.asyncMySQL(checkCreds(email, password));
 
-    simpsons[indexOfUser].token = token;
-
-    res.send({ status: 1, token });
+  //if creds do not match
+  if (results.length === 0) {
+    res.send({ status: 0, error: "Incorrect email and/or password" });
     return;
   }
 
