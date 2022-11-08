@@ -1,23 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const { updateUser } = require("../mysql/queries");
 
-router.put("/", (req, res) => {
-  const { body, currentUser } = req;
+router.put("/", async (req, res) => {
+  const { name, email, password } = req.body;
 
-  if (body.quote && typeof body.quote === "string") {
-    currentUser.quote = body.quote;
-  }
-  if (body.character && typeof body.quote === "string") {
-    currentUser.character = body.character;
-  }
-  if (body.image && typeof body.quote === "string") {
-    currentUser.image = body.image;
-  }
-  if (body.characterDirection && typeof body.quote === "string") {
-    currentUser.characterDirection = body.characterDirection;
-  }
+  console.log(updateUser(name, email, password, req.headers.token));
+  const result = await req.asyncMySQL(
+    updateUser(name, email, password, req.headers.token)
+  );
 
-  res.send({ status: 1 });
+  if (result.affectedRows === 1) {
+    res.send({ status: 1 });
+  } else {
+    res.send({ status: 0, error: "Duplicate entry" });
+    return;
+  }
 });
 
 module.exports = router;

@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
     return;
   }
 
-<<<<<<< HEAD
   // //if a search filter the results
   // let filtered = _simpsons;
   // if (search) {
@@ -31,10 +30,10 @@ router.get("/", async (req, res) => {
   // console.log(req.simpsons);
   // }
 
-  res.send(req.currentUser);
-=======
+  // req.currentUser = results[0];
+  // console.log(req.currentUser);
+
   res.send({ status: 1, result: results[0] });
->>>>>>> 53e67de417fde6f3930d557bee69763405c46b75
 });
 
 module.exports = router;
